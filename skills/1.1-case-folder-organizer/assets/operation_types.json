@@ -1,0 +1,80 @@
+{
+  "operation_types": {
+    "mkdir": {
+      "code": "mkdir",
+      "display_name": "新建目录",
+      "description": "创建新目录（按需建立，有文件才建）",
+      "example": "新建目录 1.起诉状和证据/",
+      "execution_order": 1,
+      "notes": "必须先建目录，再移动文件"
+    },
+    "rename": {
+      "code": "rename",
+      "display_name": "重命名",
+      "description": "修改文件名，保持同一目录",
+      "example": "身份证_scan.pdf → 身份证 张三.pdf",
+      "execution_order": 2,
+      "notes": "全角括号自动转为半角"
+    },
+    "move": {
+      "code": "move",
+      "display_name": "移动",
+      "description": "移动文件到目标目录",
+      "example": "判决书.pdf → 2.法院通知 一审/判决书（张三 一审）.pdf",
+      "execution_order": 2,
+      "notes": "目标目录必须先存在"
+    },
+    "delete": {
+      "code": "delete",
+      "display_name": "删除（重复）",
+      "description": "删除重复文件",
+      "example": "删除 证据1.pdf（重复）",
+      "execution_order": 2,
+      "notes": "仅删除确认重复的文件，docx+pdf同名配对不算重复"
+    },
+    "rename_folder": {
+      "code": "rename_folder",
+      "display_name": "文件夹重命名",
+      "description": "最后执行，避免路径失效",
+      "example": "重命名根目录为 '001 劳动合同纠纷-张三'",
+      "execution_order": 3,
+      "notes": "必须在所有文件操作完成后执行"
+    }
+  },
+  "execution_order": [
+    "mkdir",
+    "rename",
+    "move",
+    "delete",
+    "rename_folder"
+  ],
+  "constraints": {
+    "confirmation_required": true,
+    "no_execution_before_confirm": true,
+    "description": "未经用户确认绝不执行任何写入/改名/删除/移动操作"
+  },
+  "post_operations": {
+    "update_snapshot": {
+      "order": 4,
+      "description": "更新 .case_snapshot.json"
+    },
+    "generate_index": {
+      "order": 5,
+      "description": "生成/更新 .case_index.json（收尾最后一步）"
+    },
+    "generate_route_cache": {
+      "order": 6,
+      "description": "生成 .case_route_cache.json（如 §4.5 已执行）"
+    },
+    "update_progress": {
+      "order": 7,
+      "description": "初始化/更新 .case_progress.json"
+    }
+  },
+  "meta": {
+    "version": "2.1.0",
+    "last_updated": "2026-05-14",
+    "description": "文件操作类型常量定义，对应 SKILL.md §6.1 和 §7",
+    "name": "operation_types"
+  }
+}

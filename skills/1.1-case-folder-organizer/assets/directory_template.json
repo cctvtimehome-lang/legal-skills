@@ -1,0 +1,159 @@
+{
+  "root_dir": "{case_number} {cause_name}-{client_name}",
+  "standard_dirs": {
+    "level1": [
+      {
+        "id": "0",
+        "name": "0.委托发票",
+        "condition": "有委托材料才建"
+      },
+      {
+        "id": "1",
+        "name": "1.起诉状和证据",
+        "condition": "有起诉材料才建"
+      },
+      {
+        "id": "2",
+        "name": "2.法院通知 一审",
+        "condition": "有一审通知才建"
+      },
+      {
+        "id": "3",
+        "name": "3.答辩和证据",
+        "condition": "有答辩材料才建"
+      },
+      {
+        "id": "4",
+        "name": "4.反诉和证据",
+        "condition": "识别到反诉状才建"
+      },
+      {
+        "id": "5",
+        "name": "5.上诉状和证据",
+        "condition": "有二审代理才建"
+      },
+      {
+        "id": "6",
+        "name": "6.法院通知 二审",
+        "condition": "有二审通知才建"
+      },
+      {
+        "id": "7",
+        "name": "7.答辩二审",
+        "condition": "有二审答辩才建"
+      },
+      {
+        "id": "8",
+        "name": "8.再审申请和证据",
+        "condition": "识别到再审申请书才建"
+      },
+      {
+        "id": "9",
+        "name": "9.法院通知 再审",
+        "condition": "有再审通知才建"
+      },
+      {
+        "id": "A",
+        "name": "A.财产保全",
+        "condition": "识别到保全类文件才建"
+      },
+      {
+        "id": "B",
+        "name": "B.执行",
+        "condition": "识别到执行类文件才建",
+        "children": [
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "B5"
+        ]
+      },
+      {
+        "id": "C",
+        "name": "C.参考案例和法规",
+        "condition": "有参考材料才建"
+      },
+      {
+        "id": "D",
+        "name": "D.管辖",
+        "condition": "识别到管辖类文件才建"
+      },
+      {
+        "id": "Z_raw",
+        "name": "Z.原始证据",
+        "condition": "用户手工放入后才介入管理",
+        "readonly": true
+      },
+      {
+        "id": "Z_pending",
+        "name": "Z.待归类",
+        "condition": "临时中转，清空后自动删除"
+      }
+    ],
+    "level2_B": [
+      {
+        "id": "B1",
+        "name": "B1.申请执行",
+        "parent": "B"
+      },
+      {
+        "id": "B2",
+        "name": "B2.执行过程",
+        "parent": "B",
+        "description": "兜底目录，无法判断子阶段的归此处"
+      },
+      {
+        "id": "B3",
+        "name": "B3.执行异议",
+        "parent": "B"
+      },
+      {
+        "id": "B4",
+        "name": "B4.执行终本",
+        "parent": "B"
+      },
+      {
+        "id": "B5",
+        "name": "B5.恢复执行",
+        "parent": "B"
+      }
+    ]
+  },
+  "case_type_templates": {
+    "labor_dispute": {
+      "trigger": "检测到劳动仲裁申请书 或 劳动仲裁裁决书(仅限劳动仲裁,不含商事仲裁)",
+      "note": "劳动争议法定仲裁前置;仲裁块(1-3)+诉讼块整体后移3位;9槽封顶到二审,再审材料按方案甲进 Z.待归类 或用户手动归位",
+      "level1": [
+        {"id":"0","name":"0.委托发票","condition":"有委托材料才建"},
+        {"id":"1","name":"1.仲裁和证据","condition":"有仲裁申请书才建"},
+        {"id":"2","name":"2.仲裁通知","condition":"有仲裁受理/开庭通知才建"},
+        {"id":"3","name":"3.仲裁答辩和证据","condition":"有仲裁答辩才建"},
+        {"id":"4","name":"4.起诉和证据","condition":"有起诉材料才建"},
+        {"id":"5","name":"5.法院通知 一审","condition":"有一审通知才建"},
+        {"id":"6","name":"6.一审答辩和证据","condition":"有一审答辩才建"},
+        {"id":"7","name":"7.反诉和证据","condition":"识别到反诉状才建"},
+        {"id":"8","name":"8.上诉状和证据","condition":"有二审代理才建"},
+        {"id":"9","name":"9.法院通知 二审","condition":"有二审通知才建"},
+        {"id":"A","name":"A.财产保全","condition":"识别到保全类文件才建"},
+        {"id":"B","name":"B.执行","condition":"识别到执行类文件才建","children":["B1","B2","B3","B4","B5"]},
+        {"id":"C","name":"C.参考案例和法规","condition":"有参考材料才建"},
+        {"id":"D","name":"D.管辖","condition":"识别到管辖类文件才建"},
+        {"id":"Z_raw","name":"Z.原始证据","condition":"用户手工放入后才介入管理","readonly":true},
+        {"id":"Z_pending","name":"Z.待归类","condition":"临时中转,清空后自动删除"}
+      ]
+    }
+  },
+  "max_depth": 3,
+  "rules": {
+    "no_empty_dirs": true,
+    "demand_only": true,
+    "no_level4": true
+  },
+  "meta": {
+    "version": "2.1.0",
+    "last_updated": "2026-05-14",
+    "description": "标准目录结构模板，定义所有允许的目录和子目录",
+    "name": "directory_template"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "global_rules": {
+    "fullwidth_to_halfwidth": true,
+    "convert_chars": {
+      "（": "(",
+      "）": ")",
+      "：": ":",
+      "；": ";"
+    },
+    "preserve_chars": [
+      "－"
+    ]
+  },
+  "file_naming_patterns": {
+    "identity_card": {
+      "pattern": "身份证 {name}.{ext}",
+      "example": "身份证 张三.pdf",
+      "fields": [
+        "name"
+      ],
+      "description": "身份证扫描件命名规范"
+    },
+    "court_document": {
+      "pattern": "{doc_type}（{party} {stage}）.pdf",
+      "example": "判决书（张三 一审）.pdf",
+      "fields": [
+        "doc_type",
+        "party",
+        "stage"
+      ],
+      "doc_types": [
+        "判决书",
+        "裁定书",
+        "调解书",
+        "上诉状",
+        "起诉状",
+        "答辩状"
+      ],
+      "stages": [
+        "一审",
+        "二审",
+        "再审",
+        "执行"
+      ],
+      "description": "法院文书命名规范"
+    },
+    "evidence": {
+      "pattern": "证据{index}.{title}.pdf",
+      "example": "证据1.劳动合同.pdf",
+      "fields": [
+        "index",
+        "title"
+      ],
+      "description": "证据文件命名规范"
+    },
+    "contract": {
+      "pattern": "{contract_type}（{party}）.{ext}",
+      "example": "委托合同（张三）.pdf",
+      "fields": [
+        "contract_type",
+        "party"
+      ],
+      "contract_types": [
+        "委托合同",
+        "服务合同",
+        "Legal Service Agreement"
+      ],
+      "description": "合同类文件命名规范"
+    }
+  },
+  "directory_naming": {
+    "format": "{id}.{name}",
+    "example": "1.起诉状和证据",
+    "reserved_prefixes": [
+      "0-9",
+      "A-D",
+      "Z"
+    ],
+    "description": "目录命名格式：编号+点+名称"
+  },
+  "special_rules": {
+    "docx_pdf_pair_not_duplicate": true,
+    "description": "docx + pdf 同名配对不算重复，均保留"
+  },
+  "meta": {
+    "version": "2.1.0",
+    "last_updated": "2026-05-14",
+    "description": "默认文件命名规范，对应 reference/23-naming-defaults.md",
+    "name": "naming_rules_default"
+  }
+}

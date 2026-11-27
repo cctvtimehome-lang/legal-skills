@@ -1,0 +1,65 @@
+{
+  "whitelist": {
+    "level1_dirs": [
+      "0.委托发票",
+      "1.起诉状和证据",
+      "2.法院通知 一审",
+      "3.答辩和证据",
+      "4.反诉和证据",
+      "5.上诉状和证据",
+      "6.法院通知 二审",
+      "7.答辩二审",
+      "8.再审申请和证据",
+      "9.法院通知 再审",
+      "1.仲裁和证据",
+      "2.仲裁通知",
+      "3.仲裁答辩和证据",
+      "4.起诉和证据",
+      "5.法院通知 一审",
+      "6.一审答辩和证据",
+      "7.反诉和证据",
+      "8.上诉状和证据",
+      "9.法院通知 二审",
+      "A.财产保全",
+      "B.执行",
+      "C.参考案例和法规",
+      "D.管辖",
+      "Z.原始证据",
+      "Z.待归类"
+    ],
+    "level2_dirs_B": [
+      "B1.申请执行",
+      "B2.执行过程",
+      "B3.执行异议",
+      "B4.执行终本",
+      "B5.恢复执行"
+    ],
+    "forbidden_patterns": [
+      "内部工作文件",
+      "内部资料",
+      "临时文件",
+      "未分类",
+      "其他",
+      "misc"
+    ],
+    "fallback_dir": "Z.待归类",
+    "rules": {
+      "strict_check": true,
+      "allow_only_whitelisted": true,
+      "log_violations": true,
+      "description": "遇到无法归入任何标准目录的文件，统一进 Z.待归类/，不得自行命名新目录"
+    }
+  },
+  "validation": {
+    "level1_pattern": "^[0-9A-DZ]\\..+$",
+    "level2_pattern_B": "^B[1-5]\\..+$",
+    "Z_raw_readonly": true,
+    "Z_pending_temporary": true
+  },
+  "meta": {
+    "version": "2.1.0",
+    "last_updated": "2026-05-14",
+    "description": "标准目录白名单，防止创建非标准目录（对应 SKILL.md §9 约束11）",
+    "name": "allowed_directories_whitelist"
+  }
+}

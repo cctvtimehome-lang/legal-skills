@@ -1,0 +1,33 @@
+# 运行时缓存与案件数据（严禁入库）
+.case_index.json
+*_cache.json
+.*_cache.json
+.case_timeline.json
+案情摘要.json
+案情摘要.docx
+
+# 凭证 / 密钥
+mcp.json
+.env
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node / TS
+node_modules/
+dist/
+*.tsbuildinfo
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 编辑器
+.vscode/
+.idea/
+*.swp

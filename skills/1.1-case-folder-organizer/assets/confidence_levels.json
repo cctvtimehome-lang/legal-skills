@@ -1,0 +1,67 @@
+{
+  "confidence_levels": {
+    "high": {
+      "level": "high",
+      "threshold": 0.85,
+      "criteria": [
+        "文件类型明确（如起诉状.docx、身份证.pdf）",
+        "归属目录唯一（如起诉状→1.起诉状和证据/）",
+        "文件名含关键信息（如'张三 身份证'）"
+      ],
+      "action": "列入表格A，自动执行",
+      "output_field": "auto_ops",
+      "display_name": "高置信度"
+    },
+    "medium": {
+      "level": "medium",
+      "threshold": 0.5,
+      "criteria": [
+        "能识别类型但归属目录不确定（如'证据材料.pdf'）",
+        "文件名模糊（如'扫描件001.pdf'）",
+        "需人工判断细分类型（如'法院文书.pdf'是一审通知还是二审通知）"
+      ],
+      "action": "暂存Z.待归类/，列入表格B，附判断理由和建议选项",
+      "output_field": "warnings",
+      "pending_dir": "Z.待归类/",
+      "display_name": "中置信度"
+    },
+    "low": {
+      "level": "low",
+      "threshold": 0.0,
+      "criteria": [
+        "乱码文件名（如'%@#%$.pdf'）",
+        "格式异常无法识别",
+        "内容无法判断（需LLM视觉识别）"
+      ],
+      "action": "暂存Z.待归类/，列入表格B，标注'无法识别，请人工处理'",
+      "output_field": "llm_needed",
+      "pending_dir": "Z.待归类/",
+      "display_name": "无法识别"
+    }
+  },
+  "output_structure": {
+    "auto_ops": {
+      "description": "高置信度，直接执行",
+      "table": "表格A"
+    },
+    "llm_needed": {
+      "description": "低置信度，需LLM视觉识别",
+      "table": "表格B"
+    },
+    "warnings": {
+      "description": "中置信度，需人工决定",
+      "table": "表格B"
+    }
+  },
+  "llm_vision_usage": {
+    "trigger": "llm_needed 列表非空",
+    "action": "调用 Read 工具读取预览图，识别'姓名'字段",
+    "output": "追加至 auto_ops：{\"type\": \"rename\", \"src\": \"...\", \"dst\": \"身份证 姓名.ext\"}"
+  },
+  "meta": {
+    "version": "2.1.0",
+    "last_updated": "2026-05-14",
+    "description": "文件识别置信度分档规则，对应 SKILL.md §6.1",
+    "name": "confidence_levels"
+  }
+}
